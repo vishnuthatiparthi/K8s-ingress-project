@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ingress
+  namespace: myapp
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /catalog
+        pathType: Prefix
+        backend:
+          service:
+            name: catalog
+            port:
+              number: 80
+      - path: /frontend
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+      - path: /orders
+        pathType: Prefix
+        backend:
+          service:
+            name: orders
+            port:
+              number: 80
+
